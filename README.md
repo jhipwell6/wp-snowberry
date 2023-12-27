@@ -5,7 +5,6 @@
 * Version: 0.1
 * Author: The Snowberry Team
 * Author URI: https://snowberrymedia.com/
-* Requires WP_MVC Framework
-*
+* Requires: WP_MVC Framework
 * Text Domain: wp-snowberry
 
