@@ -18,6 +18,7 @@ class Snowberry_Template extends MVC_Controller_Registry
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ), 9999 );
 		add_filter( 'script_loader_tag', array( $this, 'load_data_as_module' ), 10, 3 );
 		add_action( 'wp_footer', array( $this, 'load_js_templates' ), 10 );
+		add_action( 'send_headers', 'send_frame_options_header', 10, 0 );
 	}
 
 	public function enqueue_frontend_scripts()
@@ -26,13 +27,14 @@ class Snowberry_Template extends MVC_Controller_Registry
 			WP_SNOWBERRY_TEXT_DOMAIN . '-styles',
 			WP_Snowberry()->plugin_url() . '/assets/css/wp-snowberry-frontend.css',
 			array(),
+			filemtime( WP_Snowberry()->plugin_path() . '/assets/css/wp-snowberry-frontend.css' ),
 		);
 
 		wp_register_script(
 			WP_SNOWBERRY_TEXT_DOMAIN . '-scripts',
 			WP_Snowberry()->plugin_url() . '/assets/js/wp-snowberry-frontend.js',
 			array(),
-			'',
+			filemtime( WP_Snowberry()->plugin_path() . '/assets/js/wp-snowberry-frontend.js' ),
 			true
 		);
 

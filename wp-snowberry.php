@@ -149,6 +149,8 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 			// Controllers
 			include_once $this->plugin_path() . '/includes/controllers/snowberry-site.php';
 			include_once $this->plugin_path() . '/includes/controllers/snowberry-template.php';
+			include_once $this->plugin_path() . '/includes/controllers/snowberry-services.php';
+			include_once $this->plugin_path() . '/includes/controllers/admin/snowberry-work-admin.php';
 		}
 
 		/**
