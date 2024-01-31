@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="sbm-arrow-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 14 9.7" style="enable-background:new 0 0 14 9.7;" xml:space="preserve">
+<style type="text/css">
+	.arrow-path{fill:#EE2C58;}
+</style>
+<g>
+	<path class="arrow-path" d="M14,4.9L9.2,9.7l-1.1-1l3-3H0V4.1h11.2L8.1,1l1.1-1L14,4.9z"/>
+</g>
+</svg>

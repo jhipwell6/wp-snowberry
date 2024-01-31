@@ -8,6 +8,10 @@ var WP_Snowberry = ( function ( WP_Snowberry, $ ) {
 	 */
 	WP_Snowberry.Common = {
 		init() {
+			if ( $( 'body' ).hasClass( 'fl-builder-edit' ) ) {
+				return;
+			}
+
 			this.initTooltips();
 			this.initFSelect();
 			$( document ).on( 'facetwp-loaded', $.proxy( this.initFSelect, this ) );

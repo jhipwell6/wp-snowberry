@@ -33,6 +33,12 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 		 * @var null
 		 */
 		private $site = null;
+		
+		/**
+		 * Factory for returning work items
+		 * @var null
+		 */
+		private $work_factory = null;
 
 		/**
 		 * @var WP_Snowberry The single instance of the class
@@ -135,6 +141,8 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 			// Models
 			// WP_Snowberry\Models\Site
 			include_once $this->plugin_path() . '/includes/models/Site.php';
+			// WP_Snowberry\Models\Work
+			include_once $this->plugin_path() . '/includes/models/Work.php';
 
 			// Core
 			include_once $this->plugin_path() . '/includes/core/helpers.php';
@@ -142,6 +150,7 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 			include_once $this->plugin_path() . '/includes/core/post-types.php';
 			include_once $this->plugin_path() . '/includes/core/custom-fields.php';
 			include_once $this->plugin_path() . '/includes/core/form-handler.php';
+			include_once $this->plugin_path() . '/includes/core/work-factory.php';
 
 			// IMPORTANT - Controllers must be included after Models.
 			// This is because cron actions hooked/defined in Controllers will fire as soon as the Controller is included and the add_action() with cron hook name is called.
@@ -150,6 +159,7 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 			include_once $this->plugin_path() . '/includes/controllers/snowberry-site.php';
 			include_once $this->plugin_path() . '/includes/controllers/snowberry-template.php';
 			include_once $this->plugin_path() . '/includes/controllers/snowberry-services.php';
+			include_once $this->plugin_path() . '/includes/controllers/snowberry-work.php';
 			include_once $this->plugin_path() . '/includes/controllers/admin/snowberry-work-admin.php';
 		}
 
@@ -158,7 +168,7 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 		 */
 		public function init_factories()
 		{
-			
+			$this->work_factory = new \WP_Snowberry\Core\Work_Factory;
 		}
 
 		public function Site()
@@ -168,7 +178,24 @@ if ( ! class_exists( 'WP_Snowberry' ) ) :
 			}
 			return $this->site;
 		}
+		
+		/**
+		 * Return the collection of Work items
+		 */
+		public function Work_Collection()
+		{
+			return $this->work_factory;
+		}
 
+		/**
+		 * Return the Model of an work item
+		 * @param  mixed $work_item    item
+		 */
+		public function Work( $work_item = 0, $by_unique_id = null )
+		{
+			return $this->work_factory->get( $work_item, $by_unique_id );
+		}
+		
 		/**
 		 * Get queue instance.
 		 *
